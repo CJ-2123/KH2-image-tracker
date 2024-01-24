@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyblade Tracker</title>
+  <style>
+    body {
+      background: #111111
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 100px);
+      gap: 10px;
+    }
+    .grid-item {
+      width: 100px;
+      height: 100px;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="options">
+    <label for="image-options">Images: </label> 
+    <select name="image-options" id="image-options"> 
+        <option value="KH2_Keyblades">KH2 Keyblades</option> 
+        <option value="KH2_Recipes">KH2 Recipes</option> 
+    </select>
+
+    <button id="start" onclick="setImages(document.getElementById('image-options').value)">Submit</button>
+  </div>
+
+  <br>
+
+  <div class="grid"></div>
+
+  <script>
+
+    function setImages(path) {
+
+    var images = [];
+
+    switch(path) {
+      case 'KH2_Keyblades':
+        path = "Keyblades";
+        total_images = 24;
+        break;
+      
+      case 'KH2_Recipes':
+        path = "Recipes";
+        total_images = 16;
+        break;
+
+      default:
+        total_images = 24;
+    }
+
+    for (let i = 1; i < total_images + 1; i++) {
+      images.push(path + '/image' + i + '.png')
+    }
+
+    var grid = document.querySelector('.grid');
+
+    images.forEach(function(imageSrc) {
+      var image = new Image();
+      image.src = imageSrc;
+
+      var gridItem = document.createElement('div');
+      gridItem.classList.add('grid-item');
+      gridItem.appendChild(image);
+
+      gridItem.addEventListener('click', function() {
+        // this block for one color
+        // if (this.style.backgroundColor === 'turquoise') {
+        //   this.style.backgroundColor = 'transparent';
+        // } else {
+        //   this.style.backgroundColor = 'turquoise';
+        // }
+        
+        // this block for multiple colors
+        switch (this.style.backgroundColor) {
+          case 'green': // 1st color
+            this.style.backgroundColor = 'red'; // 2nd color
+            break;
+          case 'red': // 2nd color
+            this.style.backgroundColor = 'transparent';
+            break;
+          default:
+            this.style.backgroundColor = 'green'; // 1st color
+        }
+      });
+
+      grid.appendChild(gridItem);
+    });
+    }
+    
+  </script>
+</body>
+</html>
+
