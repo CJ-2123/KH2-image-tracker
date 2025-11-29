@@ -4,7 +4,8 @@
   <title>Keyblade Tracker</title>
   <style>
     body {
-      background: #111111
+      background: #111111;
+      color: white
     }
     .grid {
       display: grid;
@@ -25,6 +26,7 @@
     <select name="image-options" id="image-options"> 
         <option value="KH2_Keyblades">KH2 Keyblades</option> 
         <option value="KH2_Recipes">KH2 Recipes</option> 
+        <option value="KH3_Ingredients">KH3 Ingredients</option> 
     </select>
 
     <button id="start" onclick="setImages(document.getElementById('image-options').value)">Submit</button>
@@ -49,6 +51,11 @@
       case 'KH2_Recipes':
         path = "Recipes";
         total_images = 16;
+        break;
+
+      case 'KH3_Ingredients':
+        path = "Ingredients";
+        total_images = 59;
         break;
 
       default:
@@ -79,14 +86,14 @@
         
         // this block for multiple colors
         switch (this.style.backgroundColor) {
-          case 'green': // 1st color
-            this.style.backgroundColor = 'red'; // 2nd color
+          case 'gold': // 1st color
+            this.style.backgroundColor = 'turquoise'; // 2nd color
             break;
-          case 'red': // 2nd color
+          case 'turquoise': // 2nd color
             this.style.backgroundColor = 'transparent';
             break;
           default:
-            this.style.backgroundColor = 'green'; // 1st color
+            this.style.backgroundColor = 'gold'; // 1st color
         }
       });
 
