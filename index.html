@@ -29,7 +29,29 @@
         <option value="KH3_Ingredients">KH3 Ingredients</option> 
     </select>
 
-    <button id="start" onclick="setImages(document.getElementById('image-options').value)">Submit</button>
+    <label for="color1-options">Color 1: </label> 
+    <select name="color1-options" id="color1-options"> 
+        <option value="blue">Blue</option> 
+        <option value="gold">Gold</option> 
+        <option value="green">Green</option> 
+        <option value="orange">Orange</option> 
+        <option value="purple">Purple</option> 
+        <option value="red">Red</option> 
+        <option value="turquoise">Turquoise</option> 
+    </select>
+
+    <label for="color2-options">Color 2: </label> 
+    <select name="color2-options" id="color2-options"> 
+        <option value="blue">Blue</option> 
+        <option value="gold">Gold</option> 
+        <option value="green">Green</option> 
+        <option value="orange">Orange</option> 
+        <option value="purple">Purple</option> 
+        <option value="red">Red</option> 
+        <option value="turquoise">Turquoise</option> 
+    </select>
+
+    <button id="start" onclick="submit(document.getElementById('image-options').value, document.getElementById('color1-options').value, document.getElementById('color2-options').value)">Submit</button>
   </div>
 
   <br>
@@ -38,8 +60,20 @@
 
   <script>
 
-    // color 1, color 2, transparent
-    const colors = ["gold", "turquoise", "transparent"];
+    var color1 = ""
+    var color2 = ""
+    var colors = ["transparent"];
+
+    function submit(imageSet, selectedColor1, selectedColor2) {
+      setImages(imageSet);
+      color1 = selectedColor1;
+      color2 = selectedColor2;
+      colors = [color1, color2, "transparent"];
+
+      console.log(imageSet)
+      console.log(color1)
+      console.log(color2)
+    }
 
     function cycleColor(item, direction) {
       let current = item.style.backgroundColor || "transparent";
