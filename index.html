@@ -97,6 +97,28 @@
         }
       });
 
+      gridItem.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        // this block for one color
+        // if (this.style.backgroundColor === 'turquoise') {
+        //   this.style.backgroundColor = 'transparent';
+        // } else {
+        //   this.style.backgroundColor = 'turquoise';
+        // }
+        
+        // this block for multiple colors
+        switch (this.style.backgroundColor) {
+          case 'green': // 1st color
+            this.style.backgroundColor = 'red'; // 2nd color
+            break;
+          case 'red': // 2nd color
+            this.style.backgroundColor = 'transparent';
+            break;
+          default:
+            this.style.backgroundColor = 'green'; // 1st color
+        }
+      });
+
       grid.appendChild(gridItem);
     });
     }
