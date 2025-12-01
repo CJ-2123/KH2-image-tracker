@@ -38,6 +38,22 @@
 
   <script>
 
+    // color 1, color 2, transparent
+    const colors = ["gold", "turquoise", "transparent"];
+
+    function cycleColor(item, direction) {
+      let current = item.style.backgroundColor || "transparent";
+      let index = colors.indexOf(current);
+
+      if (direction === "forward") {
+        index = (index + 1) % colors.length;
+      } else {
+        index = (index - 1 + colors.length) % colors.length;
+      }
+
+      item.style.backgroundColor = colors[index];
+    }
+
     function setImages(path) {
 
     var images = [];
@@ -69,55 +85,29 @@
     var grid = document.querySelector('.grid');
 
     images.forEach(function(imageSrc) {
-      var image = new Image();
-      image.src = imageSrc;
+        var image = new Image();
+        image.src = imageSrc;
 
-      var gridItem = document.createElement('div');
-      gridItem.classList.add('grid-item');
-      gridItem.appendChild(image);
+        var gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+        gridItem.appendChild(image);
 
-      gridItem.addEventListener('click', function() {
-        // this block for one color
-        // if (this.style.backgroundColor === 'turquoise') {
-        //   this.style.backgroundColor = 'transparent';
-        // } else {
-        //   this.style.backgroundColor = 'turquoise';
-        // }
-        
-        // this block for multiple colors
-        switch (this.style.backgroundColor) {
-          case 'gold': // 1st color
-            this.style.backgroundColor = 'turquoise'; // 2nd color
-            break;
-          case 'turquoise': // 2nd color
-            this.style.backgroundColor = 'transparent';
-            break;
-          default:
-            this.style.backgroundColor = 'gold'; // 1st color
-        }
-      });
+        // Click
+        gridItem.addEventListener('click', function() {
+          cycleColor(this, "forward");
+        });
 
-      gridItem.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        // this block for one color
-        // if (this.style.backgroundColor === 'turquoise') {
-        //   this.style.backgroundColor = 'transparent';
-        // } else {
-        //   this.style.backgroundColor = 'turquoise';
-        // }
-        
-        // this block for multiple colors
-        switch (this.style.backgroundColor) {
-          case 'green': // 1st color
-            this.style.backgroundColor = 'red'; // 2nd color
-            break;
-          case 'red': // 2nd color
-            this.style.backgroundColor = 'transparent';
-            break;
-          default:
-            this.style.backgroundColor = 'green'; // 1st color
-        }
-      });
+        // Scroll wheel
+        gridItem.addEventListener('wheel', function(e) {
+          e.preventDefault();
+          if (e.deltaY > 0) {
+            // scroll down
+            cycleColor(this, "backward");
+          } else {
+            // scroll up
+            cycleColor(this, "forward");
+          }
+        });
 
       grid.appendChild(gridItem);
     });
