@@ -25,6 +25,7 @@
     <label for="image-options">Images: </label> 
     <select name="image-options" id="image-options"> 
         <option value="KH2_Keyblades">KH2 Keyblades</option> 
+        <option value="KH2R_Keyblades">KH2R Keyblades</option> 
         <option value="KH2_Recipes">KH2 Recipes</option> 
         <option value="KH3_Ingredients">KH3 Ingredients</option> 
     </select>
@@ -106,6 +107,11 @@
       case 'KH3_Ingredients':
         path = "Ingredients";
         total_images = 59;
+        break;
+      
+      case 'KH2R_Keyblades':
+        path = "KH2R-Keyblades";
+        total_images = 25;
         break;
 
       default:
